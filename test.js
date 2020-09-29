@@ -20,25 +20,70 @@ const student = new mongoose.Schema({
     },
     info: {
         school: {
-            type: string
+            type: String
         },
         showsize: {
             type: Number
-        }
+        },
+    },
+    school: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'school'
     }
+}, { timestamps: true })
 
+const school = new mongoose.Schema({
+    name: String,
+    students: Number,
+    isGreat: Boolean,
+    stafd:[{type:String}]
 })
 
+
+const School = mongoose.model('school', school);
 const Student = mongoose.model('student', student)
+
+
 
 connect()
     .then(async connection => {
-        const student = await Student.create({
-            firstname: 'moh'
-        })
-        const student = await Student.find({ firstname: 'moh' })
-        const found = await Student.findById('dsadas')
-        const updated = await Student.findByIdAndUpdate('', {})
-        console.log(student);
+        const schoolConfig = {
+            name: 'salahe22',
+            students: 3000,
+            isGreat: true,
+            staff:['a', 'b', 'c']
+        }
+
+
+        const school2 = {
+            name: 'alie3',
+            students: 200,
+            isGreat: false,
+            staff:['a', 'b', 'c']
+        }
+
+        const school3 = {
+            name: 'saeede1',
+            students: 500,
+            isGreat: true,
+            staff:['a', 'b', 'c']
+        }
+
+
+        const schools = await School.create([ school2, school3])
+
+        const match = await School.findOne({staff:'b'}).exec()
+
+        console.log(match);
+
+        //     const school = await School.findOneAndUpdate({ name: 'shohadaa' }, { name: 'shohadaa' }, { upsert: true, useFindAndModify: false, new: true }).exec()
+        //     const student = await Student.create({ firstname: 'moh', age: 26, school: school._id },)
+        //     const student2 = await Student.create({ firstname: 'ahmed', age: 36, school: school._id })
+
+        //     const match = await Student.find({firstname:'moh'})
+        //         .populate('school')
+        //         .exec()
+        //     console.log(match)
     })
     .catch((err) => console.log(err))
