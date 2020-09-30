@@ -37,8 +37,9 @@ const school = new mongoose.Schema({
     name: String,
     students: Number,
     isGreat: Boolean,
-    stafd:[{type:String}]
+    staff:[{type:String}]
 })
+
 
 
 const School = mongoose.model('school', school);
@@ -49,7 +50,7 @@ const Student = mongoose.model('student', student)
 connect()
     .then(async connection => {
         const schoolConfig = {
-            name: 'salahe22',
+            name: 'c',
             students: 3000,
             isGreat: true,
             staff:['a', 'b', 'c']
@@ -57,14 +58,14 @@ connect()
 
 
         const school2 = {
-            name: 'alie3',
+            name: 'b',
             students: 200,
             isGreat: false,
             staff:['a', 'b', 'c']
         }
 
         const school3 = {
-            name: 'saeede1',
+            name: 'a',
             students: 500,
             isGreat: true,
             staff:['a', 'b', 'c']
@@ -73,7 +74,7 @@ connect()
 
         const schools = await School.create([ school2, school3])
 
-        const match = await School.findOne({staff:'b'}).exec()
+        const match = await School.find({staff:'b'}).exec()
 
         console.log(match);
 
