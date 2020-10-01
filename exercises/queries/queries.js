@@ -21,22 +21,23 @@ const postByTitle = (title) => {
 }
 
 const postsForAuthor = (authorId) => {
-  const postsFromAuthor = Post.findById(authorId)
+  const postsFromAuthor = Post.find({id:authorId})
   return postsForAuthor;
 }
 
 const fullPostById = (id) => {
-  const fpostById = Post.find({id:id});
+  const fpostById = Post.findById(id);
   return fpostById
 }
 
 const allPostsSlim = (fieldsToSelect) => {
   const allpostsS = Post.find(fieldsToSelect)
-  return allpostsS
+  return allpostsS;
 }
 
 const postByContentLength = (maxContentLength, minContentLength) => {
   const pBContentLenth = Post.find({contentLength:{$gte:maxContentLength,$lt:minContentLength}})
+  return pBContentLenth;
 }
 
 const addSimilarPosts = (postId, similarPosts) => {
