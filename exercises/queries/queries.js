@@ -21,12 +21,12 @@ const postByTitle = (title) => {
 }
 
 const postsForAuthor = (authorId) => {
-  const postsFromAuthor = Post.find({id:authorId})
-  return postsForAuthor;
+  const match = Post.findById({author:{id:authorId}})
+  return match;
 }
 
 const fullPostById = (id) => {
-  const fpostById = Post.findById(id);
+  const fpostById = Post.find(id);
   return fpostById
 }
 
