@@ -16,27 +16,30 @@ const postByTitle = (title) => {
   //   }
   // })
 
-  const match =  Post.findOne({title:title});
+  const match = Post.findOne({ title });
   return match;
 }
 
 const postsForAuthor = (authorId) => {
-  const match = Post.findById({author:{id:authorId}})
+  const match = Post.find({ author: authorId })
   return match;
 }
 
 const fullPostById = (id) => {
-  const fpostById = Post.find(id);
-  return fpostById
+  return Post.findById(id)
+    .populate('author')
+    .exec()
 }
 
 const allPostsSlim = (fieldsToSelect) => {
-  const allpostsS = Post.find(fieldsToSelect)
-  return allpostsS;
+  return Post.find()
+  .select(fieldsToSelect)
+  .exec()
+
 }
 
 const postByContentLength = (maxContentLength, minContentLength) => {
-  const pBContentLenth = Post.find({contentLength:{$gte:maxContentLength,$lt:minContentLength}})
+  const pBContentLenth = Post.find({ contentLength: { $gte: maxContentLength, $lt: minContentLength } })
   return pBContentLenth;
 }
 
