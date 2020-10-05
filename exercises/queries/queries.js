@@ -32,9 +32,9 @@ const fullPostById = (id) => {
 }
 
 const allPostsSlim = (fieldsToSelect) => {
-  return Post.find()
-  .select(fieldsToSelect)
-  .exec()
+  return Post.find({})
+    .select(fieldsToSelect)
+    .exec()
 
 }
 
@@ -44,7 +44,10 @@ const postByContentLength = (maxContentLength, minContentLength) => {
 }
 
 const addSimilarPosts = (postId, similarPosts) => {
-  // const addSimPosts = await Post.find({})
+  return Post.findByIdAndUpdate(postId, {
+    $push: { similarPosts: { $each: similarPosts } }
+  },{new:true})
+  .exec()
 }
 
 module.exports = {
