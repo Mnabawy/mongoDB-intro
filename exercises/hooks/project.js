@@ -25,4 +25,10 @@ const projectSchema = new mongoose.Schema({
   }
 })
 
+projectSchema.index({
+  org:{
+    unique:true
+  }
+})
+
 module.exports = mongoose.model('project', projectSchema)
